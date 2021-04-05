@@ -22,6 +22,8 @@ export default class Hello2 extends HelloWorld {
   notSure: any = 'hi'
   notSureSecond: any = 4
   list: any[] = [1, true, 'free']
+  u: undefined = undefined
+  n: null = null
 
   created() {
     console.log(this.name)
@@ -42,6 +44,12 @@ export default class Hello2 extends HelloWorld {
 
   warnUser(): void {
     console.log('this is my warning message')
+
+    // basically, null and undefined are lower types of all other types.
+    // which means null and undefined can be assigned to the type 'number' for example.
+    let u: undefined = undefined
+    let n: null = null
+    console.log(u, n)
   }
 
 }
