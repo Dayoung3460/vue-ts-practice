@@ -9,6 +9,7 @@
     <button @click="warnUser">warnUser</button>
     <button @click="error('hi')">error</button>
     <button @click="fail">fail</button>
+    <p>{{ mySqure.color }}, {{ mySqure.area }}</p>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ export default class Hello2 extends HelloWorld {
   list: any[] = [1, true, 'free']
   u: undefined = undefined
   n: null = null
+  mySqure = this.createSquare({ color: 'block' })
 
   created() {
     console.log(this.name)
@@ -62,6 +64,17 @@ export default class Hello2 extends HelloWorld {
   // Return type can be assumed as 'never'.
   fail() {
     return this.error('Something failed')
+  }
+
+  createSquare(config: SquareConfig): { color: string; area: number } {
+    let newSquare = { color: 'white', area: 100 }
+    if(config.color) {
+      newSquare.color = config.color
+    }
+    if(config.width) {
+      newSquare.area = config.width * config.width
+    }
+    return newSquare
   }
 
 }
@@ -122,13 +135,16 @@ let notSure: any = 4
 notSure = 'maybe a string instead'
 console.log(notSure)
 
-
-
-
 let prettySure: Object = 4
 // error: property 'toFixed()' doesn't exist in object
 // prettySure.toFixed()
 console.log(prettySure)
+
+// has optional property: along with the keyword '?'
+interface SquareConfig {
+  color?: string
+  width?: number
+}
 
 
 
