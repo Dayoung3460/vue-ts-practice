@@ -7,6 +7,8 @@
     <p>{{ notSureSecond.toFixed() }}</p>
     <p>{{ list[2] }}</p>
     <button @click="warnUser">warnUser</button>
+    <button @click="error('hi')">error</button>
+    <button @click="fail">fail</button>
   </div>
 </template>
 
@@ -50,6 +52,16 @@ export default class Hello2 extends HelloWorld {
     let u: undefined = undefined
     let n: null = null
     console.log(u, n)
+  }
+
+  // The function that returns 'never' can't reach to the end of function.
+  error(message: string): never {
+    throw new Error(message)
+  }
+
+  // Return type can be assumed as 'never'.
+  fail() {
+    return this.error('Something failed')
   }
 
 }
