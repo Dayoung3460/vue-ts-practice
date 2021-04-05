@@ -6,6 +6,7 @@
     <p>{{ notSure }}</p>
     <p>{{ notSureSecond.toFixed() }}</p>
     <p>{{ list[2] }}</p>
+    <button @click="warnUser">warnUser</button>
   </div>
 </template>
 
@@ -37,6 +38,10 @@ export default class Hello2 extends HelloWorld {
 
   greeter(person: Person) {
     return "Hello, " + person.firstName + ' ' + person.lastName
+  }
+
+  warnUser(): void {
+    console.log('this is my warning message')
   }
 
 }
