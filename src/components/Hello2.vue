@@ -28,6 +28,17 @@ export default class Hello2 extends HelloWorld {
   u: undefined = undefined
   n: null = null
   mySqure = this.createSquare({ color: 'block' })
+  p1: Point = { x: 10, y: 20 }
+  // readonly property can't be modified
+  // p1.x = 5
+
+  a: number[] = [1, 2, 3, 4]
+  ro: ReadonlyArray<number> = this.a
+  //All errors.
+  // ro[0] = 12
+  // ro.push(5)
+  // ro.length = 100
+  // a = r0
 
   created() {
     console.log(this.name)
@@ -36,6 +47,10 @@ export default class Hello2 extends HelloWorld {
   mounted() {
     console.log(this.user.getAdmin('da', 0))
     logText<LengthWise>({ length: 10, value: 'hi' })
+
+    // Overriding by 'type assertion' is possible.
+    this.a = this.ro as number[]
+    this.a[0] = 5
   }
 
   getArea(obj: Shape) {
@@ -144,6 +159,11 @@ console.log(prettySure)
 interface SquareConfig {
   color?: string
   width?: number
+}
+
+interface Point {
+  readonly x: number
+  readonly y: number
 }
 
 
