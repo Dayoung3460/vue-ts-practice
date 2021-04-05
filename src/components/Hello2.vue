@@ -10,6 +10,11 @@
     <button @click="error('hi')">error</button>
     <button @click="fail">fail</button>
     <p>{{ mySqure.color }}, {{ mySqure.area }}</p>
+    <p>{{ myStr }}</p>
+    <button @click="notOkay({ name: 'ddolddol' })">notOkay</button>
+    <button @click="numberDictionary({ length: 1 })">numberDictionary</button>
+    <button @click="numberOrStringDictionary({ length: 1, name: 'yeolMu' })">numberOrStringDictionary</button>
+    <p>{{ myReadonlyArray[0] }}</p>
   </div>
 </template>
 
@@ -39,6 +44,11 @@ export default class Hello2 extends HelloWorld {
   // ro.push(5)
   // ro.length = 100
   // a = r0
+
+  myArray: StringArray = ['Bob', 'Fred']
+  myStr: string = this.myArray[1]
+
+  myReadonlyArray: ReadonlyStringArray = ['Alice', 'Bob']
 
   created() {
     console.log(this.name)
@@ -90,6 +100,18 @@ export default class Hello2 extends HelloWorld {
       newSquare.area = config.width * config.width
     }
     return newSquare
+  }
+
+  notOkay(config: NotOkay) {
+    console.log(config.name)
+  }
+
+  numberDictionary(config: NumberDictionary) {
+    console.log(config.length)
+  }
+
+  numberOrStringDictionary(config: NumberOrStringDictionary) {
+    console.log(config.name)
   }
 
 }
@@ -165,6 +187,52 @@ interface Point {
   readonly x: number
   readonly y: number
 }
+
+interface StringArray {
+  [index: number]: string
+}
+
+class Animal {
+  name: string
+  constructor(name: string) {
+    this.name = name
+  }
+}
+
+class Dog extends Animal {
+  breed: string
+  constructor(name: string, breed: string) {
+    super(name)
+    this.breed = breed
+  }
+}
+
+interface NotOkay {
+  // error
+  // [x: number]: Animal
+  [x: string]: Dog
+}
+
+interface NumberDictionary {
+  [index: string]: number
+  length: number
+  // A type of 'name' is not a subtype of indexer's type(number)
+  // name: string
+}
+
+interface NumberOrStringDictionary {
+  [index: string]: number | string
+  length: number
+  name: string
+}
+
+interface ReadonlyStringArray {
+  readonly [index: number]: string
+}
+// let myArray: ReadonlyStringArray = ['Alice', 'Bob']
+// error. it's readonly
+// myArray[2] = 'Mallory'
+
 
 
 
