@@ -3,7 +3,9 @@
     hello2 {{ sayHi('ccccc') }}
     <button @click="getArea({ kind: 'triangle', x: 3, y: 4})">getArea</button>
     <span>{{ greeter(user3) }}</span>
-
+    <p>{{ notSure }}</p>
+    <p>{{ notSureSecond.toFixed() }}</p>
+    <p>{{ list[2] }}</p>
   </div>
 </template>
 
@@ -13,12 +15,12 @@ import { Component } from 'vue-property-decorator';
 
 @Component
 export default class Hello2 extends HelloWorld {
-
-
   user = new UserAccount('Clara', 2)
   user2 = { firstName: 'Jane', lastName: 'User'}
   user3 = new Student('Jane', 'M', 'User')
-
+  notSure: any = 'hi'
+  notSureSecond: any = 4
+  list: any[] = [1, true, 'free']
 
   created() {
     console.log(this.name)
@@ -90,6 +92,25 @@ class Student {
     this.fullName = firstName + ' ' + middleInitial + ' ' + lastName
   }
 }
+
+let notSure: any = 4
+notSure = 'maybe a string instead'
+console.log(notSure)
+
+
+
+
+let prettySure: Object = 4
+// error: property 'toFixed()' doesn't exist in object
+// prettySure.toFixed()
+console.log(prettySure)
+
+
+
+
+
+
+
 
 
 
